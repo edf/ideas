@@ -1,0 +1,181 @@
+Package                   Version
+
+------------------------- ---------
+
+arrow                     1.2.3
+
+attrs                     23.1.0
+
+aws-lambda-builders       1.36.0
+
+aws-sam-cli               1.96.0
+
+aws-sam-translator        1.73.0
+
+backports.zoneinfo        0.2.1
+
+binaryornot               0.4.4
+
+boto3                     1.28.37
+
+boto3-stubs               1.28.33
+
+botocore                  1.31.37
+
+botocore-stubs            1.31.37
+
+certifi                   2023.7.22
+
+cffi                      1.15.1
+
+cfn-lint                  0.79.7
+
+chardet                   5.2.0
+
+charset-normalizer        3.2.0
+
+chevron                   0.14.0
+
+click                     8.1.7
+
+cookiecutter              2.1.1
+
+cryptography              41.0.3
+
+dateparser                1.1.8
+
+docker                    6.1.3
+
+Flask                     2.2.5
+
+git-remote-codecommit     1.17
+
+idna                      3.4
+
+importlib-metadata        6.7.0
+
+importlib-resources       5.12.0
+
+itsdangerous              2.1.2
+
+Jinja2                    3.1.2
+
+jinja2-time               0.2.0
+
+jmespath                  1.0.1
+
+jschema-to-python         1.2.3
+
+jsonpatch                 1.33
+
+jsonpickle                3.0.2
+
+jsonpointer               2.4
+
+jsonschema                4.17.3
+
+junit-xml                 1.9
+
+markdown-it-py            2.2.0
+
+MarkupSafe                2.1.3
+
+mdurl                     0.1.2
+
+mpmath                    1.3.0
+
+mypy-boto3-apigateway     1.28.36
+
+mypy-boto3-cloudformation 1.28.36
+
+mypy-boto3-ecr            1.28.36
+
+mypy-boto3-iam            1.28.37
+
+mypy-boto3-lambda         1.28.36
+
+mypy-boto3-s3             1.28.36
+
+mypy-boto3-schemas        1.28.36
+
+mypy-boto3-secretsmanager 1.28.36
+
+mypy-boto3-signer         1.28.36
+
+mypy-boto3-stepfunctions  1.28.36
+
+mypy-boto3-sts            1.28.37
+
+mypy-boto3-xray           1.28.36
+
+networkx                  2.6.3
+
+packaging                 23.1
+
+pbr                       5.11.1
+
+pip                       20.2.2
+
+pkgutil-resolve-name      1.3.10
+
+pycparser                 2.21
+
+pydantic                  1.10.12
+
+Pygments                  2.16.1
+
+pyOpenSSL                 23.2.0
+
+pyrsistent                0.19.3
+
+python-dateutil           2.8.2
+
+python-slugify            8.0.1
+
+pytz                      2023.3
+
+PyYAML                    6.0.1
+
+regex                     2023.8.8
+
+requests                  2.31.0
+
+rich                      13.5.2
+
+ruamel.yaml               0.17.32
+
+ruamel.yaml.clib          0.2.7
+
+s3transfer                0.6.2
+
+sarif-om                  1.0.4
+
+setuptools                49.1.3
+
+six                       1.16.0
+
+sympy                     1.10.1
+
+text-unidecode            1.3
+
+tomlkit                   0.11.8
+
+types-awscrt              0.19.1
+
+types-s3transfer          0.6.2
+
+typing-extensions         4.7.1
+
+tzlocal                   5.0.1
+
+urllib3                   1.26.16
+
+watchdog                  2.1.2
+
+websocket-client          1.6.1
+
+Werkzeug                  2.2.3
+
+wheel                     0.41.2
+
+zipp                      3.15.0

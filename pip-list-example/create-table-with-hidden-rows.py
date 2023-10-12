@@ -4,11 +4,11 @@ workbook = xlsxwriter.Workbook('hidden-rows.xlsx') # create a new excel workbook
 worksheet = workbook.add_worksheet()               # add a new worksheet
 
 data = [
-    ['x', 'x', 'x', 'x'], # hidden row
     ['a', 'b', 'c', 'd'], # visible row
-    ['x', 'y', 'z', 'x'], # visible row
-    ['e', 'f', 'g', 'h'], # visible row
     ['x', 'x', 'x', 'x'], # hidden row
+    ['x', 'y', 'z', 'x'], # visible row
+    ['x', 'x', 'x', 'x'], # hidden row
+    ['e', 'f', 'g', 'h'], # visible row
 ]
 
 # write to worksheet

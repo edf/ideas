@@ -2,10 +2,10 @@ import xlsxwriter
 
 # Create a data array
 data = [
-    ["Z", 53, "F"],
-    ["T", 49, "M"],
-    ["A", 55, "F"],
-    ["L", 61, "M"],
+    ["Z", "53", "F"],
+    ["T", "49", "M"],
+    ["A", "55", "F"],
+    ["L", "61", "M"],
 ]
 
 # Sort the data array by column names and row names

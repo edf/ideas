@@ -39,13 +39,28 @@ server_info = {}
 for server in servers:
     client = ssh_connect(server["hostname"], server["username"], server["key_path"])
     if client:
-        df_output = execute_command(client, "df -Th")
-        fstab = execute_command(client, "cat /etc/fstab")
         print(f"Server: {server['hostname']}")
+        df_output = execute_command(client, "df -Th | grep nfs")
         print("Disk Space Information:")
         print(df_output)
-        print("\n/etc/fstab Contents:")
-        print(fstab)
+        for line in df_lines:
+            df_columns = line.split()
+            print("\tdf_columns\t", end="")
+            print(type(df_columns))
+            for i, df_column_value in enumerate(df_columns):
+               print(f"\t\tcolumn {i}: {df_column_value}")")      
+                print("\n/etc/fstab Contents:")
+        
+        fstab = execute_command(client, "grep ^fs /etc/fstab")
+        print("\tfstab\t", end="")
+        print(type(fstab))
+        fstab_lines = fstab.splitlines()
+        for line in fstab_lines:
+            fstab_columns = line.split()
+            print("\tfstab_columns\t", end="")
+            print(type(fstab_columns))
+            for i, fstab_column_value in enumerate(fstab_columns):
+               print(f"\t\tcolumn {i}: {fstab_column_value}")
         server_info[server["hostname"]] = {
             "disk_space": df_output,
             "fstab_contents": fstab
@@ -63,3 +78,5 @@ for server_name, info in server_info.items():
     print(info["fstab_contents"])
 
 print("All servers processed.")
+#print(type(server_info))
+#pprint.pprint(server_info)

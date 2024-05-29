@@ -80,3 +80,198 @@ for server_name, info in server_info.items():
 print("All servers processed.")
 #print(type(server_info))
 #pprint.pprint(server_info)
+
+
+'''
+example output
+
+Server: server0
+        df_output
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1://special
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 75G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /special
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1:/
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 14T
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /conversion
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1:/
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 243G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /channel
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1://media
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 75G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /media
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1:/
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 305G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /interface
+        fstab   <class 'str'>
+        fstab_columns   <class 'list'>
+                column 0: fs-1:/
+                column 1: /channel
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-2://special
+                column 1: /special
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-2://media
+                column 1: /media
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-3:/
+                column 1: /interface
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-4:/
+                column 1: /conversion
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+Server: server1
+        df_output
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1:/
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 243G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /channel
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1:/
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 305G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /interface
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1://media
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 75G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /media
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1://special
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 75G
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /special
+        df_columns      <class 'list'>
+                column 0: 127.0.0.1:/
+                column 1: nfs4
+                column 2: 8.0E
+                column 3: 14T
+                column 4: 8.0E
+                column 5: 1%
+                column 6: /conversion
+        fstab   <class 'str'>
+        fstab_columns   <class 'list'>
+                column 0: fs-1:/
+                column 1: /channel
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-2://special
+                column 1: /special
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-2:///media
+                column 1: /media
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-3:/
+                column 1: /interface
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+        fstab_columns   <class 'list'>
+                column 0: fs-4:/
+                column 1: /conversion
+                column 2: efs
+                column 3: _netdev,noresvport,tls
+                column 4: 0
+                column 5: 0
+Server: server0
+Disk Space Information:
+127.0.0.1://special nfs4      8.0E   75G  8.0E   1% /special
+127.0.0.1:/           nfs4      8.0E   14T  8.0E   1% /conversion
+127.0.0.1:/           nfs4      8.0E  243G  8.0E   1% /channel
+127.0.0.1://media   nfs4      8.0E   75G  8.0E   1% /media
+127.0.0.1:/           nfs4      8.0E  305G  8.0E   1% /interface
+
+
+/etc/fstab Contents that starts with fs:
+fs-1:/ /channel efs _netdev,noresvport,tls 0 0
+fs-2://special /special  efs _netdev,noresvport,tls 0 0
+fs-2://media /media   efs _netdev,noresvport,tls 0 0
+fs-3:/ /interface efs _netdev,noresvport,tls 0 0
+fs-4:/ /conversion efs _netdev,noresvport,tls 0 0
+
+Server: server1
+Disk Space Information:
+127.0.0.1:/           nfs4      8.0E  243G  8.0E   1% /channel
+127.0.0.1:/           nfs4      8.0E  305G  8.0E   1% /interface
+127.0.0.1://media   nfs4      8.0E   75G  8.0E   1% /media
+127.0.0.1://special nfs4      8.0E   75G  8.0E   1% /special
+127.0.0.1:/           nfs4      8.0E   14T  8.0E   1% /conversion
+
+
+/etc/fstab Contents that starts with fs:
+fs-1:/ /channel efs _netdev,noresvport,tls 0 0
+fs-2://special  /special  efs _netdev,noresvport,tls 0 0
+fs-2:///media   /media   efs _netdev,noresvport,tls 0 0
+fs-3:/ /interface efs _netdev,noresvport,tls 0 0
+fs-4:/ /conversion efs _netdev,noresvport,tls 0 0
+
+All servers processed.
+'''

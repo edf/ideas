@@ -6,6 +6,8 @@
 #  - handle using 12 hour clock instead of expected 24 hour clock format
 #  - other
 
+aws_region_name = 'us-west-2'  # Specify your region here
+
 import boto3
 from datetime import datetime, timezone
 import re
@@ -19,7 +21,7 @@ def validate_time_format(time_str):
     return False
 
 def lambda_handler(event, context):
-    ec2 = boto3.client('ec2')
+    ec2 = boto3.client('ec2', region_name=aws_region_name)
     response = ec2.describe_instances(
         Filters=[
             {

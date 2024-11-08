@@ -1,4 +1,11 @@
 # header1
+# list
+1. one
+  1. one one
+  1. one two
+1. two
+1. three   
+
 ## header2
 ### header3
 
@@ -23,11 +30,5 @@
 <details>
    <summary>Section B</summary>
    important stuff goes here
-# list
-1. one
-  1. one one
-  1. one two
-1. two
-1. three   
 </details>
 

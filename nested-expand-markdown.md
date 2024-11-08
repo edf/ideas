@@ -1,13 +1,13 @@
-# header1
-# list
+# header-level-1
+# header-level-1
 1. one
      1. one one
      1. one two
 1. two
 1. three   
 
-## header2
-### header3
+## header-level-2
+### header-level-3
 
 <details>
   <summary>Section A</summary>
@@ -30,10 +30,12 @@
 <details>
    <summary>Section B</summary>
    important stuff goes here
+     
 1. one
      1. one one
      1. one two
 1. two
-1. three   
+1. three
+   
 </details>
 

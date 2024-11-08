@@ -20,4 +20,5 @@
 
 <details>
    <summary>Section B</summary>
+   important stuff goes here
 </details>

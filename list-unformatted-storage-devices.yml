@@ -1,0 +1,26 @@
+---
+- name: Find Non-XFS Filesystems (excluding root)
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Get block device information
+      command: lsblk -f
+      register: lsblk_output
+
+    - name: Find devices not formatted as xfs (excluding root)
+      set_fact:
+        non_xfs_devices: "{{ non_xfs_devices | default([]) + [item.split()[0]] }}"
+      loop: "{{ lsblk_output.stdout_lines }}"
+      when: "'xfs' not in item and item.split()[1] != '' and item.split()[5] != '/'"
+
+    - name: Display devices not formatted as xfs (excluding root)
+      debug:
+        msg: "Device {{ item }} is not formatted as xfs."
+      loop: "{{ non_xfs_devices | unique }}"
+      when: non_xfs_devices is defined and non_xfs_devices | length > 0
+
+    - name: Display message if all non-root devices are xfs
+      debug:
+        msg: "All detected non-root block devices are formatted as xfs."
+      when: non_xfs_devices is not defined or non_xfs_devices | length == 0

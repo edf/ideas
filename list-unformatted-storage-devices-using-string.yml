@@ -1,0 +1,32 @@
+---
+- name: List unformatted devices from lsblk output
+  hosts: localhost
+  gather_facts: false
+  vars:
+    lsblk_output: |
+      NAME   FSTYPE LABEL UUID                                 MOUNTPOINT
+      sda                                                     
+      ├─sda1 ext4         a1b2c3d4-e5f6-7890-abcd-1234567890ab /
+      sdb                                                     
+      sdc                                                     
+      sdd                                                     
+
+  tasks:
+    - name: Split lsblk output into lines
+      ansible.builtin.set_fact:
+        lsblk_lines: "{{ lsblk_output.split('\n') | select('match', '^\\w') | list }}"
+
+    - name: Extract unformatted device names (excluding sda)
+      ansible.builtin.set_fact:
+        unformatted_storage_devices: >-
+          {{
+            lsblk_lines
+            | reject('search', '\\s+\\w')          # Lines with no FSTYPE, UUID, etc.
+            | map('regex_search', '^(\\w+)')       # Extract device name
+            | reject('equalto', 'sda')             # Exclude sda
+            | list
+          }}
+
+    - name: Show unformatted devices
+      ansible.builtin.debug:
+        msg: "Unformatted devices: {{ unformatted_devices }}"

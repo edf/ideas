@@ -1,32 +1,62 @@
 ---
-- name: List unformatted devices from lsblk output
+- name: Identify unformatted block devices
   hosts: localhost
   gather_facts: false
+
   vars:
+    root_disk_name: nvme0n1
+
     lsblk_output: |
-      NAME   FSTYPE LABEL UUID                                 MOUNTPOINT
-      sda                                                     
-      ├─sda1 ext4         a1b2c3d4-e5f6-7890-abcd-1234567890ab /
-      sdb                                                     
-      sdc                                                     
-      sdd                                                     
+      NAME="nvme0n1" TYPE="disk" MOUNTPOINT=""
+      NAME="nvme0n1p1" TYPE="part" MOUNTPOINT=""
+      NAME="nvme0n1p2" TYPE="part" MOUNTPOINT="/boot/efi"
+      NAME="nvme0n1p3" TYPE="part" MOUNTPOINT="/boot"
+      NAME="nvme0n1p4" TYPE="part" MOUNTPOINT="/"
+      NAME="nvme1n1" TYPE="disk" MOUNTPOINT=""
+      NAME="nvme1n1p1" TYPE="part" MOUNTPOINT="[SWAP]"
+      NAME="nvme2n1" TYPE="disk" MOUNTPOINT=""
+      NAME="nvme2n1p1" TYPE="part" MOUNTPOINT="/usr"
+      NAME="nvme3n1" TYPE="disk" MOUNTPOINT=""
+      NAME="nvme4n1" TYPE="disk" MOUNTPOINT=""
 
   tasks:
+
     - name: Split lsblk output into lines
       ansible.builtin.set_fact:
-        lsblk_lines: "{{ lsblk_output.split('\n') | select('match', '^\\w') | list }}"
+        lsblk_lines: "{{ lsblk_output.splitlines() }}"
 
-    - name: Extract unformatted device names (excluding sda)
+    - name: Parse each line into dict and build device list
+      vars:
+        parsed: "{{ dict(item | regex_findall('([A-Z]+)=\"(.*?)\"')) }}"
       ansible.builtin.set_fact:
-        unformatted_storage_devices: >-
-          {{
-            lsblk_lines
-            | reject('search', '\\s+\\w')          # Lines with no FSTYPE, UUID, etc.
-            | map('regex_search', '^(\\w+)')       # Extract device name
-            | reject('equalto', 'sda')             # Exclude sda
-            | list
-          }}
+        lsblk_devices: "{{ lsblk_devices | default([]) + [parsed] }}"
+      loop: "{{ lsblk_lines }}"
 
-    - name: Show unformatted devices
+    - name: Get all disk device names
+      ansible.builtin.set_fact:
+        all_disks: >-
+          {{ lsblk_devices
+             | selectattr('TYPE', 'equalto', 'disk')
+             | map(attribute='NAME')
+             | list }}
+
+    - name: Get all used disk names (partitions with mountpoints or swap)
+      ansible.builtin.set_fact:
+        used_disks: >-
+          {{ lsblk_devices
+             | selectattr('TYPE', 'equalto', 'part')
+             | selectattr('MOUNTPOINT', 'match', '.+')
+             | map(attribute='NAME')
+             | map('regex_replace', 'p?[0-9]+$', '')  # Strip partition suffix
+             | list }}
+
+    - name: Determine unformatted disks
+      ansible.builtin.set_fact:
+        unformatted_disks: >-
+          {{ all_disks
+             | difference(used_disks)
+             | difference([root_disk_name]) }}
+
+    - name: Show result
       ansible.builtin.debug:
-        msg: "Unformatted devices: {{ unformatted_devices }}"
+        var: unformatted_disks

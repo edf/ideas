@@ -47,7 +47,7 @@
              | selectattr('TYPE', 'equalto', 'part')
              | selectattr('MOUNTPOINT', 'match', '.+')
              | map(attribute='NAME')
-             | map('regex_replace', 'p?[0-9]+$', '')  # Strip partition suffix
+             | map('regex_replace', 'p?[0-9]+$', '')
              | list }}
 
     - name: Determine unformatted disks
